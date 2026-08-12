@@ -1,14 +1,15 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
-import { pipelineToolDefinition, handleGetPipelineStatus } from './tools/pipeline.tool';
-import { vulnerabilityToolDefinition, handleTriageVulnerabilities } from './tools/vulnerability.tool';
-import { logsToolDefinition, handleSearchLogs } from './tools/logs.tool';
-import { dependencyToolDefinition, handleScanDependencies } from './tools/dependency.tool';
+import { pipelineToolDefinition, handleGetPipelineStatus } from './tools/pipeline.tool.js';
+import { vulnerabilityToolDefinition, handleTriageVulnerabilities } from './tools/vulnerability.tool.js';
+import { logsToolDefinition, handleSearchLogs } from './tools/logs.tool.js';
+import { dependencyToolDefinition, handleScanDependencies } from './tools/dependency.tool.js';
+import { registerK8sIncidentTools } from './tools/kubernetes.js';
 
 // ============================================================================
 // MCP Server — AI-Assisted DevSecOps Agent
-// Exposes four security-critical tools to any MCP-compatible LLM client.
+// Exposes security-critical tools to any MCP-compatible LLM client.
 // ============================================================================
 
 const server = new McpServer({
@@ -53,6 +54,9 @@ server.tool(
     content: [{ type: 'text' as const, text: handleScanDependencies(args) }]
   })
 );
+
+// Register the new SRE Incident tools
+registerK8sIncidentTools(server);
 
 // --- Start Server ---
 
