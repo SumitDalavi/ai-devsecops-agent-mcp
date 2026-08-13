@@ -99,6 +99,87 @@ src/
 | Mock data layer | Keeps the PoC self-contained without requiring real GitHub/Jira API keys |
 | stdio transport | Default for local MCP; SSE available for remote deployment |
 
+
+## ðŸ“‹ Prerequisites
+
+| Tool | Version | Purpose |
+|------|---------|---------|
+| [Node.js](https://nodejs.org/) | >= 20.x | Runtime |
+| [npm](https://www.npmjs.com/) | >= 10.x | Package manager |
+| [Docker](https://www.docker.com/) | >= 24.x | Containerization (optional) |
+| MCP Client | Any | Claude Desktop, GitHub Copilot, Cursor, etc. |
+
+## ðŸš€ Step-by-Step Setup
+
+### Option A: Local Development
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/SumitDalavi/ai-devsecops-agent-mcp.git
+cd ai-devsecops-agent-mcp
+
+# 2. Install dependencies
+npm install
+
+# 3. Build the TypeScript project
+npm run build
+
+# 4. Start the MCP server (stdio transport)
+npm run start
+```
+
+### Option B: Docker
+
+```bash
+# 1. Clone and build
+git clone https://github.com/SumitDalavi/ai-devsecops-agent-mcp.git
+cd ai-devsecops-agent-mcp
+
+# 2. Build and run
+docker build -t devsecops-mcp-agent .
+docker run -i devsecops-mcp-agent
+```
+
+### Connecting to Claude Desktop
+
+Add to your Claude Desktop config (`claude_desktop_config.json`):
+```json
+{
+  "mcpServers": {
+    "devsecops-agent": {
+      "command": "node",
+      "args": ["/absolute/path/to/ai-devsecops-agent-mcp/dist/index.js"]
+    }
+  }
+}
+```
+
+## ðŸ§ª Usage & Demo
+
+Once connected to an MCP client, you can ask natural language questions like:
+
+| Prompt | Tool Invoked |
+|--------|-------------|
+| "Show me the latest pipeline runs" | `get_pipeline_status` |
+| "Are there any critical vulnerabilities?" | `triage_vulnerabilities` |
+| "Search for error logs in the payment service" | `search_logs` |
+| "Scan dependencies for known CVEs" | `scan_dependencies` |
+| "Show me Kubernetes events in production" | `get-kubernetes-events` |
+| "Check for active incidents" | `get-sre-incident-correlation` |
+
+The server returns structured JSON data that the LLM reasons over to provide contextual answers.
+
+## âœ… Verification
+
+```bash
+# Verify the build succeeds
+npm run build
+
+# Verify the server starts (it will wait for MCP client connection on stdio)
+node dist/index.js
+# You should see: "DevSecOps MCP Agent running on stdio" on stderr
+```
+
 ## 👨‍💻 Author
 
 *Built to demonstrate AI-augmented DevSecOps workflows and close the gap between LLM assistants and operational tooling.*
