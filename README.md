@@ -2,6 +2,9 @@
 
 > An MCP (Model Context Protocol) server exposing DevSecOps tooling to LLM clients — turning your AI copilot into a security-aware engineering partner.
 
+> **⚠️ PoC Note:** All tools return mock/simulated data — no live GitHub Actions, Jira, or logging integrations required. The MCP protocol implementation and tool structure are fully functional.
+
+
 ## The Problem
 
 DevSecOps teams drown in context-switching: checking pipeline status in one tab, triaging vulnerabilities in another, searching logs in a third. Meanwhile, LLM coding assistants can write code but are blind to your operational reality — they can't see your failing builds, open CVEs, or production errors.
@@ -16,6 +19,8 @@ This MCP server bridges the gap by exposing **four security-critical tools** to 
 | `triage_vulnerabilities` | Queries a vulnerability board and returns severity-ranked CVEs |
 | `search_logs` | Searches application logs by service, severity, and time range |
 | `scan_dependencies` | Analyzes a `package.json` or `requirements.txt` for known vulnerabilities |
+| `get-kubernetes-events` | Fetches recent K8s events for incident correlation (OOMKills, scheduling failures) |
+| `get-sre-incident-correlation` | Correlates SRE incidents across pipeline, vulnerability, and runtime data |
 
 ## Why This Over the Obvious Alternative
 
@@ -100,7 +105,7 @@ src/
 | stdio transport | Default for local MCP; SSE available for remote deployment |
 
 
-## ðŸ“‹ Prerequisites
+## 📋 Prerequisites
 
 | Tool | Version | Purpose |
 |------|---------|---------|
@@ -109,7 +114,7 @@ src/
 | [Docker](https://www.docker.com/) | >= 24.x | Containerization (optional) |
 | MCP Client | Any | Claude Desktop, GitHub Copilot, Cursor, etc. |
 
-## ðŸš€ Step-by-Step Setup
+## 🚀 Step-by-Step Setup
 
 ### Option A: Local Development
 
@@ -154,7 +159,7 @@ Add to your Claude Desktop config (`claude_desktop_config.json`):
 }
 ```
 
-## ðŸ§ª Usage & Demo
+## 🧪 Usage & Demo
 
 Once connected to an MCP client, you can ask natural language questions like:
 
@@ -169,7 +174,7 @@ Once connected to an MCP client, you can ask natural language questions like:
 
 The server returns structured JSON data that the LLM reasons over to provide contextual answers.
 
-## âœ… Verification
+## ✅ Verification
 
 ```bash
 # Verify the build succeeds
@@ -182,4 +187,9 @@ node dist/index.js
 
 ## 👨‍💻 Author
 
-*Built to demonstrate AI-augmented DevSecOps workflows and close the gap between LLM assistants and operational tooling.*
+**Sumit Dalavi** — Senior DevSecOps / Platform Engineer
+[GitHub](https://github.com/SumitDalavi) | [LinkedIn](https://in.linkedin.com/in/sumit-dalavi-762838129)
+
+---
+
+*Built with a focus on production-grade patterns, not toy demos.*
