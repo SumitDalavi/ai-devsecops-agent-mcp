@@ -1,5 +1,17 @@
 # Architecture: AI-Assisted DevSecOps MCP Agent
 
+## System Diagram
+The following Mermaid.js sequence diagram maps the core workflow and interactions:
+
+```mermaid
+sequenceDiagram
+    LLM->>Agent: Intent
+Agent->>MCP: Action Request
+MCP->>System: Execute
+System-->>Agent: Result
+```
+
+
 ## What is MCP?
 The **Model Context Protocol (MCP)** is an open standard created by Anthropic that allows LLM applications to connect to external data sources and tools. Think of it as a USB-C port for AI — a universal interface that any LLM client can plug into.
 
