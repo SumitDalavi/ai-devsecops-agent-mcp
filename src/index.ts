@@ -1,5 +1,6 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { z } from 'zod';
 
 import { pipelineToolDefinition, handleGetPipelineStatus } from './tools/pipeline.tool.js';
 import { vulnerabilityToolDefinition, handleTriageVulnerabilities } from './tools/vulnerability.tool.js';
@@ -22,8 +23,11 @@ const server = new McpServer({
 server.tool(
   pipelineToolDefinition.name,
   pipelineToolDefinition.description,
-  pipelineToolDefinition.inputSchema.properties,
-  async (args: { branch?: string; status?: string }) => ({
+  {
+    branch: z.string().optional().describe('Filter by branch name (e.g., "main")'),
+    status: z.enum(['success', 'failure', 'in_progress', 'queued']).optional().describe('Filter by pipeline status')
+  },
+  async (args) => ({
     content: [{ type: 'text' as const, text: handleGetPipelineStatus(args) }]
   })
 );
@@ -31,8 +35,11 @@ server.tool(
 server.tool(
   vulnerabilityToolDefinition.name,
   vulnerabilityToolDefinition.description,
-  vulnerabilityToolDefinition.inputSchema.properties,
-  async (args: { severity?: string; status?: string }) => ({
+  {
+    severity: z.enum(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']).optional().describe('Filter by minimum severity level'),
+    status: z.enum(['open', 'resolved', 'ignored']).optional().describe('Filter by vulnerability status')
+  },
+  async (args) => ({
     content: [{ type: 'text' as const, text: handleTriageVulnerabilities(args) }]
   })
 );
@@ -40,8 +47,12 @@ server.tool(
 server.tool(
   logsToolDefinition.name,
   logsToolDefinition.description,
-  logsToolDefinition.inputSchema.properties,
-  async (args: { service?: string; level?: string; keyword?: string }) => ({
+  {
+    service: z.string().optional().describe('Filter by service name'),
+    level: z.enum(['INFO', 'WARN', 'ERROR', 'DEBUG']).optional().describe('Filter by minimum log level'),
+    keyword: z.string().optional().describe('Search keyword in log message')
+  },
+  async (args) => ({
     content: [{ type: 'text' as const, text: handleSearchLogs(args) }]
   })
 );
@@ -49,8 +60,10 @@ server.tool(
 server.tool(
   dependencyToolDefinition.name,
   dependencyToolDefinition.description,
-  dependencyToolDefinition.inputSchema.properties,
-  async (args: { min_severity?: string }) => ({
+  {
+    min_severity: z.enum(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']).optional().describe('Filter dependencies with vulnerabilities above this severity')
+  },
+  async (args) => ({
     content: [{ type: 'text' as const, text: handleScanDependencies(args) }]
   })
 );

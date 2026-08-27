@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
-export async function handleGetKubernetesEvents({ namespace, limit = 50 }: { namespace: string; limit?: number }) {
+export async function handleGetKubernetesEvents({ namespace, limit = 50 }: any) {
   console.log(`[Kubernetes Tool] Fetching recent events for namespace: ${namespace}`);
   
   const mockEvents = [
@@ -38,7 +38,7 @@ export async function handleGetKubernetesEvents({ namespace, limit = 50 }: { nam
   };
 }
 
-export async function handleGetPrometheusMetrics({ service, metricType, timeWindowMinutes = 30 }: { service: string; metricType: string; timeWindowMinutes?: number }) {
+export async function handleGetPrometheusMetrics({ service, metricType, timeWindowMinutes = 30 }: any) {
   console.log(`[Prometheus Tool] Fetching ${metricType} metrics for service: ${service}`);
   
   let mockData: any = { service, timeWindowMinutes };
