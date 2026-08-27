@@ -193,3 +193,9 @@ node dist/index.js
 ---
 
 *Built with a focus on production-grade patterns, not toy demos.*
+
+## CI & Reliability Updates (August 2026)
+
+- **CI Pipeline Remediation:** Successfully resolved all CI/CD pipeline failures.
+- **Specific Fix:** Upgraded Zod to match MCP SDK requirements and explicitly cast tool schemas to bypass TypeScript excessive type inference loop.
+- **Status:** 🟩 Passing
