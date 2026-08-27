@@ -75,7 +75,7 @@ export function registerK8sIncidentTools(server: McpServer) {
     {
       namespace: z.string().describe("The Kubernetes namespace to query (e.g., 'production', 'staging')"),
       limit: z.number().optional().describe("Maximum number of events to return (default: 50)")
-    },
+    } as any,
     handleGetKubernetesEvents
   );
 
@@ -86,7 +86,7 @@ export function registerK8sIncidentTools(server: McpServer) {
       service: z.string().describe("The service name to query metrics for"),
       metricType: z.enum(["error_rate", "latency", "cpu", "memory"]).describe("The type of metric to fetch"),
       timeWindowMinutes: z.number().optional().describe("Time window in minutes (default: 30)")
-    },
+    } as any,
     handleGetPrometheusMetrics
   );
 }

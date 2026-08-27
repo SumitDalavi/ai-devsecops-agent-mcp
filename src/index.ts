@@ -26,8 +26,8 @@ server.tool(
   {
     branch: z.string().optional().describe('Filter by branch name (e.g., "main")'),
     status: z.enum(['success', 'failure', 'in_progress', 'queued']).optional().describe('Filter by pipeline status')
-  },
-  async (args) => ({
+  } as any,
+  async (args: any) => ({
     content: [{ type: 'text' as const, text: handleGetPipelineStatus(args) }]
   })
 );
@@ -38,8 +38,8 @@ server.tool(
   {
     severity: z.enum(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']).optional().describe('Filter by minimum severity level'),
     status: z.enum(['open', 'resolved', 'ignored']).optional().describe('Filter by vulnerability status')
-  },
-  async (args) => ({
+  } as any,
+  async (args: any) => ({
     content: [{ type: 'text' as const, text: handleTriageVulnerabilities(args) }]
   })
 );
@@ -51,8 +51,8 @@ server.tool(
     service: z.string().optional().describe('Filter by service name'),
     level: z.enum(['INFO', 'WARN', 'ERROR', 'DEBUG']).optional().describe('Filter by minimum log level'),
     keyword: z.string().optional().describe('Search keyword in log message')
-  },
-  async (args) => ({
+  } as any,
+  async (args: any) => ({
     content: [{ type: 'text' as const, text: handleSearchLogs(args) }]
   })
 );
@@ -62,8 +62,8 @@ server.tool(
   dependencyToolDefinition.description,
   {
     min_severity: z.enum(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']).optional().describe('Filter dependencies with vulnerabilities above this severity')
-  },
-  async (args) => ({
+  } as any,
+  async (args: any) => ({
     content: [{ type: 'text' as const, text: handleScanDependencies(args) }]
   })
 );
