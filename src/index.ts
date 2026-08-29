@@ -28,7 +28,7 @@ server.tool(
     status: z.enum(['success', 'failure', 'in_progress', 'queued']).optional().describe('Filter by pipeline status')
   } as any,
   async (args: any) => ({
-    content: [{ type: 'text' as const, text: handleGetPipelineStatus(args) }]
+    content: [{ type: 'text' as const, text: await handleGetPipelineStatus(args) }]
   })
 );
 
@@ -40,7 +40,7 @@ server.tool(
     status: z.enum(['open', 'resolved', 'ignored']).optional().describe('Filter by vulnerability status')
   } as any,
   async (args: any) => ({
-    content: [{ type: 'text' as const, text: handleTriageVulnerabilities(args) }]
+    content: [{ type: 'text' as const, text: await handleTriageVulnerabilities(args) }]
   })
 );
 
@@ -53,7 +53,7 @@ server.tool(
     keyword: z.string().optional().describe('Search keyword in log message')
   } as any,
   async (args: any) => ({
-    content: [{ type: 'text' as const, text: handleSearchLogs(args) }]
+    content: [{ type: 'text' as const, text: await handleSearchLogs(args) }]
   })
 );
 
@@ -64,7 +64,7 @@ server.tool(
     min_severity: z.enum(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']).optional().describe('Filter dependencies with vulnerabilities above this severity')
   } as any,
   async (args: any) => ({
-    content: [{ type: 'text' as const, text: handleScanDependencies(args) }]
+    content: [{ type: 'text' as const, text: await handleScanDependencies(args) }]
   })
 );
 
