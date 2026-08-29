@@ -1,6 +1,9 @@
+> **NOTE:** This repository is an archival lab or partial prototype. It is not actively maintained and should not be used as a reference for production-grade deployments or performance benchmarks.
+
+
 # AI-Assisted DevSecOps Agent — MCP Server 🤖🔒
 
-> **Maturity:** Partial Prototype
+> **Maturity:** Functional Prototype
 > _An MCP (Model Context Protocol) server exposing DevSecOps tooling to LLM clients._
 
 > **⚠️ PoC Note:** All tools return mock/simulated data — no live GitHub Actions, Jira, or logging integrations required. The MCP protocol implementation and tool structure are fully functional.
@@ -208,7 +211,7 @@ node dist/index.js
 
 ---
 
-*Built with a focus on production-grade patterns, not toy demos.*
+*Built with a focus on robust patterns, not toy demos.*
 
 ## CI & Reliability Updates (August 2026)
 
