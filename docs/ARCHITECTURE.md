@@ -1,15 +1,40 @@
-# Architecture: AI-Assisted DevSecOps MCP Agent
+# Architecture — ai-devsecops-agent-mcp
+> Last updated: 2026-08-29 | Maturity: Partial Prototype
+> _MCP Server exposing DevSecOps tools._
 
 ## System Diagram
 The following Mermaid.js sequence diagram maps the core workflow and interactions:
 
 ```mermaid
-sequenceDiagram
-    LLM->>Agent: Intent
-Agent->>MCP: Action Request
-MCP->>System: Execute
-System-->>Agent: Result
+flowchart TD
+    Client(["LLM Client (Copilot/Claude)"])
+    MCP["MCP Server (Node.js)"]
+    GH["GitHub API (Live)"]
+    Mock["Mock Data Store"]
+
+    Client -->|"Tool Call: get_pipeline_status"| MCP
+    MCP -->|"If GITHUB_TOKEN set"| GH
+    MCP -->|"If no token"| Mock
+    GH -.-> MCP
+    Mock -.-> MCP
+    MCP -->|"Result JSON"| Client
 ```
+
+## Component Table
+
+| Component | File | Responsibility | Tech |
+|---|---|---|---|
+| MCP Server | `src/index.ts` | Protocol negotiation and routing | TypeScript |
+| Tools | `src/tools/*.ts` | Implementations of specific tools | TypeScript |
+| Live Integration | `src/tools/pipeline.tool.ts`| Fetches from GitHub API | fetch |
+
+## Dependency Honesty Table
+
+| Dependency | Status | Notes |
+|---|---|---|
+| MCP SDK | **Real** | Full implementation of the Model Context Protocol. |
+| GitHub Actions | **Real** | `get_pipeline_status` hits real API if token is provided. |
+| Other Tools | **Simulated** | Vuln/Logs/Deps return mock JSON data. |
 
 
 ## What is MCP?
