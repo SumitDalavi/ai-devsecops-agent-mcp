@@ -1,4 +1,4 @@
-﻿import { handleGetPipelineStatus } from '../src/tools/pipeline.tool';
+import { handleGetPipelineStatus } from '../src/tools/pipeline.tool';
 import { handleTriageVulnerabilities } from '../src/tools/vulnerability.tool';
 import { handleSearchLogs } from '../src/tools/logs.tool';
 import { handleScanDependencies } from '../src/tools/dependency.tool';
@@ -11,7 +11,7 @@ describe('MCP Agent Tools', () => {
   describe('Pipeline Tool', () => {
     it('should return all runs when no filters applied', async () => {
       const result = await handleGetPipelineStatus({});
-      expect(result).toContain(`Found ${mockPipelineRuns.length} pipeline run(s)`);
+      expect(result).toContain(`Found ${mockPipelineRuns.length} simulated pipeline run(s)`);
     });
 
     it('should filter by branch', async () => {
