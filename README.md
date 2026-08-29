@@ -1,6 +1,7 @@
 # AI-Assisted DevSecOps Agent — MCP Server 🤖🔒
 
-> An MCP (Model Context Protocol) server exposing DevSecOps tooling to LLM clients — turning your AI copilot into a security-aware engineering partner.
+> **Maturity:** Partial Prototype
+> _An MCP (Model Context Protocol) server exposing DevSecOps tooling to LLM clients._
 
 > **⚠️ PoC Note:** All tools return mock/simulated data — no live GitHub Actions, Jira, or logging integrations required. The MCP protocol implementation and tool structure are fully functional.
 
@@ -184,6 +185,21 @@ npm run build
 node dist/index.js
 # You should see: "DevSecOps MCP Agent running on stdio" on stderr
 ```
+
+## Mock Boundaries (Honest Scope)
+
+| What | Status | Details |
+|---|---|---|
+| MCP Protocol | **Real** | Full Model Context Protocol implementation (stdio). |
+| GitHub Actions Integration | **Real** | `get_pipeline_status` hits live GitHub API if `GITHUB_TOKEN` is set. |
+| Other Tools | **Mocked** | Jira/Log tools return simulated JSON data. |
+
+## 📚 Documentation
+
+- [Architecture](docs/ARCHITECTURE.md) — System diagram and component details
+- [Runbook](docs/runbook.md) — Setup, commands, and expected outputs
+- [Decisions](docs/decisions.md) — ADRs for MCP integration
+- [Changelog](docs/changelog.md) — Change history
 
 ## 👨‍💻 Author
 
