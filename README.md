@@ -3,6 +3,10 @@
 
 # AI-Assisted DevSecOps Agent — MCP Server 🤖🔒
 
+[![CI Pipeline](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/SumitDalavi/ai-devsecops-agent-mcp)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/releases)
+[![Release Workflow](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/release.yml)
+
 > **Maturity:** Functional Prototype
 > _An MCP (Model Context Protocol) server exposing DevSecOps tooling to LLM clients._
 
@@ -196,6 +200,19 @@ node dist/index.js
 | MCP Protocol | **Real** | Full Model Context Protocol implementation (stdio). |
 | GitHub Actions Integration | **Real** | `get_pipeline_status` hits live GitHub API if `GITHUB_TOKEN` is set. |
 | Other Tools | **Mocked** | Jira/Log tools return simulated JSON data. |
+
+## 🔒 Release & Security Verification
+
+Every tagged release (*.*.*) triggers an automated DevSecOps release workflow:
+1. **Automated Testing:** Runs 
+pm test and TypeScript build (
+pm run build).
+2. **MCP Server Packaging:** Packages the tarball archive (*.tgz) via 
+pm pack for MCP client integration.
+3. **Container Image Build:** Builds the containerized MCP server (ghcr.io/sumitdalavi/ai-devsecops-agent-mcp:<tag>).
+4. **Vulnerability Scanning:** Scans the container image using [Aqua Security Trivy](https://github.com/aquasecurity/trivy-action) for HIGH and CRITICAL CVEs.
+5. **SBOM Generation:** Generates a Software Bill of Materials (SBOM) in SPDX JSON format (sbom.spdx.json) using [Anchore Syft](https://github.com/anchore/sbom-action).
+6. **GitHub Release Publishing:** Packages release notes and attaches both the MCP .tgz package and sbom.spdx.json as release assets.
 
 ## 📚 Documentation
 
