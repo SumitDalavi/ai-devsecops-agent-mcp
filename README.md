@@ -286,3 +286,10 @@ cat sbom.spdx.json | jq .
 - [Runbook](docs/runbook.md)
 - [Decisions](docs/decisions.md)
 - [Changelog](docs/changelog.md)
+
+### MCP Package Usage
+Run or install via GitHub Packages npm registry:
+```bash
+npm config set @sumitdalavi:registry https://npm.pkg.github.com
+npx @sumitdalavi/ai-devsecops-agent-mcp
+```
