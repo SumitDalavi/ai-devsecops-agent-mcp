@@ -1,8 +1,16 @@
 {
-  "name": "ai-devsecops-agent-mcp",
+  "name": "@sumitdalavi/ai-devsecops-agent-mcp",
   "version": "0.2.0",
   "description": "MCP Server exposing DevSecOps tools to LLM clients",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SumitDalavi/ai-devsecops-agent-mcp.git"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
