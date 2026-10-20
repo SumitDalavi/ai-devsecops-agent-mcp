@@ -1,6 +1,6 @@
 {
   "name": "ai-devsecops-agent-mcp",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "MCP Server exposing DevSecOps tools to LLM clients",
   "main": "dist/index.js",
   "scripts": {
