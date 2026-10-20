@@ -1,5 +1,3 @@
-> **NOTE:** This repository is an archival lab or partial prototype. It is not actively maintained and should not be used as a reference for production-grade deployments or performance benchmarks.
-
 # AI-Assisted DevSecOps Agent — MCP Server 🤖🔒
 
 [![CI Pipeline](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/ci.yml)
@@ -14,7 +12,7 @@
 > **Maturity:** Functional Prototype
 > _An MCP (Model Context Protocol) server exposing DevSecOps tooling to LLM clients._
 
-> **⚠️ PoC Note:** All tools return mock/simulated data — no live GitHub Actions, Jira, or logging integrations required. The MCP protocol implementation and tool structure are fully functional.
+> **⚡ Progressive Execution:** Supports zero-config simulation by default (Tier 1) and seamlessly promotes to live GitHub Actions and Kubernetes integrations when credentials are provided (Tier 2/3). See [Execution Tiers](#-progressive-credential-loading--execution-tiers).
 
 ## The Problem
 
@@ -203,20 +201,6 @@ node dist/index.js
 | GitHub Actions Integration | **Real** | `get_pipeline_status` hits live GitHub API if `GITHUB_TOKEN` is set. |
 | Other Tools | **Mocked** | Jira/Log tools return simulated JSON data. |
 
-## 🔒 Release & Security Verification
-
-Every tagged release (
-*.*.*) triggers an automated DevSecOps release workflow:
-1. **Automated Testing:** Runs 
-pm test and TypeScript build (
-pm run build).
-2. **MCP Server Packaging:** Packages the tarball archive (*.tgz) via 
-pm pack for MCP client integration.
-3. **Container Image Build:** Builds the containerized MCP server (ghcr.io/sumitdalavi/ai-devsecops-agent-mcp:<tag>).
-4. **Vulnerability Scanning:** Scans the container image using [Aqua Security Trivy](https://github.com/aquasecurity/trivy-action) for HIGH and CRITICAL CVEs.
-5. **SBOM Generation:** Generates a Software Bill of Materials (SBOM) in SPDX JSON format (sbom.spdx.json) using [Anchore Syft](https://github.com/anchore/sbom-action).
-6. **GitHub Release Publishing:** Packages release notes and attaches both the MCP .tgz package and sbom.spdx.json as release assets.
-
 ## 🚀 Progressive Credential Loading & Execution Tiers
 
 This project implements **Progressive Credential Loading (PCL)**, allowing it to run immediately out-of-the-box without external dependencies while seamlessly upgrading as credentials are provided.
@@ -242,6 +226,32 @@ Enterprise deployment with production-grade backends, security scans, and contai
 - **Production Orchestration:** Mount secrets via Kubernetes Secrets or cloud secret managers with atomic config reload support.
 - **Release Verification:** Checksums and SPDX SBOM available on [GitHub Releases](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/releases).
 
+## 🔒 Release & Security Verification
+
+Every tagged release (`v*.*.*`) triggers an automated DevSecOps release workflow:
+1. **Automated Testing:** Runs test suite gates before build.
+2. **Container Image Build:** Builds production container image (`ghcr.io/sumitdalavi/ai-devsecops-agent-mcp:<tag>`).
+3. **Vulnerability Scanning:** Scans the image using [Aqua Security Trivy](https://github.com/aquasecurity/trivy-action) for `HIGH` and `CRITICAL` CVEs.
+4. **SBOM Generation:** Generates a Software Bill of Materials (SBOM) in SPDX JSON format (`sbom.spdx.json`) using [Anchore Syft](https://github.com/anchore/sbom-action).
+5. **GitHub Release Publishing:** Packages release notes and attaches `sbom.spdx.json` as a verifiable supply-chain asset.
+
+### Verifying Releases via GitHub CLI
+```bash
+# View release details
+gh release view v0.2.0 --repo SumitDalavi/ai-devsecops-agent-mcp
+
+# Download and verify SBOM
+gh release download v0.2.0 --repo SumitDalavi/ai-devsecops-agent-mcp --pattern "sbom.spdx.json"
+cat sbom.spdx.json | jq .
+```
+
+### MCP Package Usage
+Run or install via GitHub Packages npm registry:
+```bash
+npm config set @sumitdalavi:registry https://npm.pkg.github.com
+npx @sumitdalavi/ai-devsecops-agent-mcp
+```
+
 ## 📚 Documentation
 
 - [Architecture](docs/ARCHITECTURE.md) — System diagram and component details
@@ -257,42 +267,3 @@ Enterprise deployment with production-grade backends, security scans, and contai
 ---
 
 *Built with a focus on robust patterns, not toy demos.*
-
-## CI & Reliability Updates (August 2026)
-
-- **CI Pipeline Remediation:** Successfully resolved all CI/CD pipeline failures.
-- **Specific Fix:** Upgraded Zod to match MCP SDK requirements and explicitly cast tool schemas to bypass TypeScript excessive type inference loop.
-- **Status:** 🟩 Passing
-
-## Release & Security Verification
-
-Every tagged release (`v*.*.*`) triggers an automated DevSecOps release workflow:
-1. **Automated Testing:** Runs test suite gates before build.
-2. **Container Image Build:** Builds production container image (`ghcr.io/sumitdalavi/ai-devsecops-agent-mcp:<tag>`).
-3. **Vulnerability Scanning:** Scans the image using [Aqua Security Trivy](https://github.com/aquasecurity/trivy-action) for `HIGH` and `CRITICAL` CVEs.
-4. **SBOM Generation:** Generates a Software Bill of Materials (SBOM) in SPDX JSON format (`sbom.spdx.json`) using [Anchore Syft](https://github.com/anchore/sbom-action).
-5. **GitHub Release Publishing:** Packages release notes and attaches `sbom.spdx.json` as a verifiable supply-chain asset.
-
-### Verifying Releases via GitHub CLI
-```bash
-# View release details
-gh release view v0.1.0 --repo SumitDalavi/ai-devsecops-agent-mcp
-
-# Download and verify SBOM
-gh release download v0.1.0 --repo SumitDalavi/ai-devsecops-agent-mcp --pattern "sbom.spdx.json"
-cat sbom.spdx.json | jq .
-```
-
-## Documentation
-
-- [Architecture](docs/ARCHITECTURE.md)
-- [Runbook](docs/runbook.md)
-- [Decisions](docs/decisions.md)
-- [Changelog](docs/changelog.md)
-
-### MCP Package Usage
-Run or install via GitHub Packages npm registry:
-```bash
-npm config set @sumitdalavi:registry https://npm.pkg.github.com
-npx @sumitdalavi/ai-devsecops-agent-mcp
-```
