@@ -81,7 +81,7 @@ Add to your Claude Desktop MCP config (`claude_desktop_config.json`):
 ```json
 {
   "mcpServers": {
-    "devsecops-agent": {
+    "ai-devsecops-agent-mcp": {
       "command": "node",
       "args": ["dist/index.js"]
     }
@@ -158,7 +158,7 @@ Add to your Claude Desktop config (`claude_desktop_config.json`):
 ```json
 {
   "mcpServers": {
-    "devsecops-agent": {
+    "ai-devsecops-agent-mcp": {
       "command": "node",
       "args": ["/absolute/path/to/ai-devsecops-agent-mcp/dist/index.js"]
     }

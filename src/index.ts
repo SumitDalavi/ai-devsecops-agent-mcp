@@ -14,8 +14,8 @@ import { registerK8sIncidentTools } from './tools/kubernetes.js';
 // ============================================================================
 
 const server = new McpServer({
-  name: 'devsecops-agent',
-  version: '1.0.0',
+  name: 'ai-devsecops-agent-mcp',
+  version: '0.2.0',
 });
 
 // --- Register Tools ---
