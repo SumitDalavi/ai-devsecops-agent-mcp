@@ -21,7 +21,7 @@ DevSecOps teams drown in context-switching: checking pipeline status in one tab,
 
 ## The Solution
 
-This MCP server bridges the gap by exposing **four security-critical tools** to any MCP-compatible LLM client (GitHub Copilot, Claude Desktop, Cursor, etc.):
+This MCP server bridges the gap by exposing **six security-critical tools** to any MCP-compatible LLM client (GitHub Copilot, Claude Desktop, Cursor, etc.):
 
 | Tool | What It Does |
 |------|-------------|
@@ -39,22 +39,24 @@ Most "AI + DevOps" demos are chatbots with hardcoded responses. This project imp
 ## Architecture
 
 ```
-┌─────────────────┐     MCP (stdio/SSE)     ┌──────────────────────┐
-│  LLM Client     │◄──────────────────────►│  MCP Server          │
-│  (Copilot,      │                         │                      │
-│   Claude, etc.) │                         │  ┌────────────────┐  │
-│                 │                         │  │ Pipeline Tool   │  │
-│                 │                         │  │ Vuln Triage Tool│  │
-│                 │                         │  │ Log Search Tool │  │
-│                 │                         │  │ Dep Scan Tool   │  │
-│                 │                         │  └────────────────┘  │
-└─────────────────┘                         └──────────────────────┘
-                                                      │
-                                              ┌───────┴───────┐
-                                              │  Mock Data    │
-                                              │  (Simulated   │
-                                              │   APIs)       │
-                                              └───────────────┘
+┌─────────────────┐     MCP (stdio/SSE)     ┌────────────────────────┐
+│  LLM Client     │◄───────────────────────►│  MCP Server            │
+│  (Copilot,      │                         │                        │
+│   Claude, etc.) │                         │  ┌──────────────────┐  │
+│                 │                         │  │ Pipeline Tool    │  │
+│                 │                         │  │ Vuln Triage Tool │  │
+│                 │                         │  │ Log Search Tool  │  │
+│                 │                         │  │ Dep Scan Tool    │  │
+│                 │                         │  │ K8s Events Tool  │  │
+│                 │                         │  │ SRE Incident Tool│  │
+│                 │                         │  └──────────────────┘  │
+└─────────────────┘                         └────────────────────────┘
+                                                         │
+                                                 ┌───────┴───────┐
+                                                 │  Mock Data    │
+                                                 │  (Simulated   │
+                                                 │   APIs)       │
+                                                 └───────────────┘
 ```
 
 ## 🛠️ Tech Stack
