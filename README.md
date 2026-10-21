@@ -9,8 +9,7 @@
 [![SBOM](https://img.shields.io/badge/SBOM-SPDX%202.3-blueviolet?logo=spdx)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/releases/tag/v0.2.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-> **Maturity:** Functional Prototype
-> _An MCP (Model Context Protocol) server exposing DevSecOps tooling to LLM clients._
+> An MCP (Model Context Protocol) server exposing DevSecOps tooling to LLM clients.
 
 > **⚡ Progressive Execution:** Supports zero-config simulation by default (Tier 1) and seamlessly promotes to live GitHub Actions and Kubernetes integrations when credentials are provided (Tier 2/3). See [Execution Tiers](#-progressive-credential-loading--execution-tiers).
 
