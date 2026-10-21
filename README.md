@@ -5,6 +5,8 @@
 [![Release Workflow](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/release.yml)
 [![GHCR Container](https://img.shields.io/badge/ghcr.io-v0.2.0-blue?logo=docker&logoColor=white)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/pkgs/container/ai-devsecops-agent-mcp)
 [![npm package](https://img.shields.io/badge/npm-%40sumitdalavi-cb3837?logo=npm&logoColor=white)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/packages)
+[![Glama](https://img.shields.io/badge/Glama-MCP%20Server-0052FF?logo=anthropic&logoColor=white)](https://glama.ai/mcp/servers)
+[![Smithery](https://img.shields.io/badge/Smithery-verified-orange)](https://smithery.ai)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![SBOM](https://img.shields.io/badge/SBOM-SPDX%202.3-blueviolet?logo=spdx)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/releases/tag/v0.2.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -76,8 +78,10 @@ npm run start
 docker-compose up -d --build
 ```
 
-### Connecting to Claude Desktop
-Add to your Claude Desktop MCP config (`claude_desktop_config.json`):
+### Connecting to Claude Desktop & MCP Clients
+
+#### Option 1 — Direct Configuration (`claude_desktop_config.json` or `.mcp.json`)
+Add to your Claude Desktop or Cursor configuration:
 ```json
 {
   "mcpServers": {
@@ -88,6 +92,15 @@ Add to your Claude Desktop MCP config (`claude_desktop_config.json`):
   }
 }
 ```
+
+#### Option 2 — 1-Click Installation via Smithery.ai
+This server includes a verified `smithery.yaml` configuration for automated installation:
+```bash
+npx -y @smithery/cli install ai-devsecops-agent-mcp --client claude
+```
+
+#### Option 3 — Glama.ai Registry Manifest
+This repository provides a standardized `glama.json` manifest conforming to `https://glama.ai/mcp/schemas/server.json` for directory indexing, tool inspection, and ownership claiming on the [Glama.ai MCP Registry](https://glama.ai).
 
 ## 📁 Project Structure
 

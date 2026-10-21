@@ -1,0 +1,20 @@
+# Smithery.ai configuration for ai-devsecops-agent-mcp
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      branch:
+        type: string
+        description: "Default branch to query pipeline status (e.g. main)"
+        default: "main"
+      minSeverity:
+        type: string
+        enum: ["CRITICAL", "HIGH", "MEDIUM", "LOW"]
+        default: "HIGH"
+        description: "Minimum vulnerability severity threshold"
+  commandFunction: |-
+    (config) => ({
+      command: 'node',
+      args: ['dist/index.js']
+    })

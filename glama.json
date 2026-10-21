@@ -1,0 +1,22 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "name": "ai-devsecops-agent-mcp",
+  "description": "MCP server exposing DevSecOps tooling, CI/CD pipeline diagnostics, CVE vulnerability triage, log analysis, and Kubernetes incident correlation to LLM clients.",
+  "maintainers": [
+    "SumitDalavi"
+  ],
+  "type": "mcp_server",
+  "status": "active",
+  "transport": [
+    "stdio"
+  ],
+  "keywords": [
+    "devsecops",
+    "mcp",
+    "security",
+    "kubernetes",
+    "vulnerability-scanner",
+    "ci-cd",
+    "sre"
+  ]
+}
