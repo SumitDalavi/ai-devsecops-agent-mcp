@@ -5,7 +5,7 @@
 [![Release Workflow](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/actions/workflows/release.yml)
 [![GHCR Container](https://img.shields.io/badge/ghcr.io-v0.2.0-blue?logo=docker&logoColor=white)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/pkgs/container/ai-devsecops-agent-mcp)
 [![npm package](https://img.shields.io/badge/npm-%40sumitdalavi-cb3837?logo=npm&logoColor=white)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/packages)
-[![Glama](https://img.shields.io/badge/Glama-MCP%20Server-0052FF?logo=anthropic&logoColor=white)](https://glama.ai/mcp/servers)
+[![AI DevSecOps Agent MCP Server MCP server – quality and maintenance score on Glama](https://glama.ai/mcp/servers/SumitDalavi/ai-devsecops-agent-mcp/badges/score.svg)](https://glama.ai/mcp/servers/SumitDalavi/ai-devsecops-agent-mcp)
 [![Smithery](https://img.shields.io/badge/Smithery-verified-orange)](https://smithery.ai)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![SBOM](https://img.shields.io/badge/SBOM-SPDX%202.3-blueviolet?logo=spdx)](https://github.com/SumitDalavi/ai-devsecops-agent-mcp/releases/tag/v0.2.0)
@@ -102,7 +102,10 @@ npx -y @smithery/cli install ai-devsecops-agent-mcp --client claude
 ```
 
 #### Option 3 — Glama.ai Registry Manifest
-This repository provides a standardized `glama.json` manifest conforming to `https://glama.ai/mcp/schemas/server.json` for directory indexing, tool inspection, and ownership claiming on the [Glama.ai MCP Registry](https://glama.ai).
+
+[![AI DevSecOps Agent MCP Server MCP server – quality and maintenance score on Glama](https://glama.ai/mcp/servers/SumitDalavi/ai-devsecops-agent-mcp/badges/card.svg)](https://glama.ai/mcp/servers/SumitDalavi/ai-devsecops-agent-mcp)
+
+This repository provides a standardized `glama.json` manifest conforming to `https://glama.ai/mcp/schemas/server.json` for directory indexing, tool inspection, and ownership claiming on the [Glama.ai MCP Registry](https://glama.ai/mcp/servers/SumitDalavi/ai-devsecops-agent-mcp).
 
 ## 📁 Project Structure
 
